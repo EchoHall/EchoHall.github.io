@@ -5,4 +5,4 @@
 
 
 ## Project
-- [interactive Sceen](interactive-screen)
+- [interactive Screen](interactive-screen)
