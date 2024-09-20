@@ -1,9 +1,8 @@
 # comp sci 30
 
 ## Demos
-- [Square Moving Around Screen](square-moving)
+- [Square Moving Around Screen](moving-square)
 
 
-## Projects
-
-- [interactive Sceen](interective-sceen)
+## Project
+- [interactive Sceen](interactive-screen)
