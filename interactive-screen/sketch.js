@@ -1,9 +1,5 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+//Quan Le
+
 
 
 let width = 750;
@@ -20,6 +16,7 @@ let falling_length = 0;
 
 function setup() {
   createCanvas(width, height);
+
 }
 
 function draw() {
@@ -54,4 +51,12 @@ function small_ball(){
     // small balls
   fill("blue");
   circle(ball_x, 0 + ball_y, radius/2);
+}
+
+function draw_background(){
+  for(let y = 0; y < height; y++){
+    for(let x = 0; x < width; x++){
+      circle(x, y, 3)
+    }
+  }
 }
