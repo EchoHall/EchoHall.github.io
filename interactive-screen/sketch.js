@@ -11,15 +11,15 @@ let ball_x = 500;
 let falling_length = 0;
 
 let cloudX = 500;
-let cloudY = ball_y + 50;
+let cloudY = radius/2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
+  
 }
 
 function draw() {
-  background("gray");
+  background("skyblue");
 
   small_ball();
   
@@ -49,7 +49,7 @@ function fall_small_ball(){
   
   if (ball_y > height){
     ball_y = 0 + radius/2;
-    ball_x = random(0, width);
+    ball_x = cloudX;
   }
 }
 
@@ -61,6 +61,6 @@ function small_ball(){
 
 function cloud(){
   fill(255);
-  rotateY(PI);
-  arc(cloudX, cloudY,-radius*2,-radius*2,0, PI, CHORD);
+  arc(cloudX, cloudY, radius, radius, 0, PI, CHORD);
+
 }
