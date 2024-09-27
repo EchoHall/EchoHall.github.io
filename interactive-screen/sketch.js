@@ -6,12 +6,14 @@ let og_spot_circlex;
 let og_spot_circley;
 
 let falling_rate = 5;
-let ball_y = radius/2;
-let ball_x = 500;
+let rain_y = radius/2;
+let rain_x = 500;
 let falling_length = 0;
 
-let cloudX = 500;
-let cloudY = radius/2;
+let cat_x = -rain_x;
+let cat_y = -rain_y;
+
+let Iscat = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -25,9 +27,10 @@ function draw() {
   
   main_catcher();
   
-  fall_small_ball();
+  fall_small_rain_or_cat();
 
-  cloud();
+  create_cat();
+
 }
 
 function main_catcher(){
@@ -36,31 +39,59 @@ function main_catcher(){
   og_spot_circlex = mouseX;
   og_spot_circley = height - radius - radius/2;
 
+  //body
   arc(og_spot_circlex, og_spot_circley,radius*2,radius*2,0, PI, CHORD);
+
+  //wheels
   circle(mouseX - radius, height - radius/2, radius);
   circle(mouseX + radius, height - radius/2, radius);
 }
 
-function fall_small_ball(){
-  //movement of small ball
-  if (ball_y > 0 ) {
-    ball_y = ball_y + falling_rate;
+function fall_small_rain_or_cat(){
+  //movement of small rain
+  if (!Iscat){
+    if (rain_y > 0 ) {
+      rain_y = rain_y + falling_rate;
+    }
+    
+    if (rain_y > height){
+      rain_y = 0 + radius/2;
+      rain_x = random(0, width);
+    }
   }
-  
-  if (ball_y > height){
-    ball_y = 0 + radius/2;
-    ball_x = cloudX;
+
+  else if (Iscat){
+    if (cat_y > 0 ) {
+      cat_y = cat_y + falling_rate;
+    }
+    
+    if (cat_y > height){
+      cat_y = 0 + radius/2;
+      cat_x = random(0, width);
+    }
+  }
+
+  if(mouseIsPressed){
+    Iscat = !Iscat;
+    rain_x = -rain_x;
+    rain_y = -rain_y;
   }
 }
 
 function small_ball(){
   // small balls
   fill("blue");
-  circle(ball_x, 0 + ball_y, radius/2);
+  circle(rain_x, rain_y, radius/2);
 }
 
-function cloud(){
-  fill(255);
-  arc(cloudX, cloudY, radius, radius, 0, PI, CHORD);
+function create_cat(){
+  fill("green");
+  circle(cat_x, cat_y, radius/2);
+
+  //cat's ear
+  triangle(cat_x + radius/2/2, cat_y - radius/2/2, cat_x, cat_y - radius/2/2, cat_x + radius/2/2, cat_y - radius);
+  triangle(cat_x - radius/2/2, cat_y - radius/2/2, cat_x, cat_y - radius/2/2, cat_x - radius/2/2, cat_y - radius);
+
+  //cat's whisker
 
 }

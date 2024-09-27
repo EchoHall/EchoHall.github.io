@@ -28,16 +28,19 @@ function changeState(){
   if (IsColor === "green" && millis() > lastTime + GREEN_LIGHT_DURATION){
     IsColor = "yellow";
     lastTime = millis();
+    console.log(IsColor);
   }
 
   else if (IsColor === "yellow" && millis() > lastTime + YELLOW_LIGHT_DURATION){
     IsColor = "red";
     lastTime = millis();
+    console.log(IsColor);
   }
 
   else if (IsColor === "red" && millis() > lastTime + RED_LIGHT_DURATION){
     IsColor = "green";
     lastTime = millis();
+    console.log(IsColor);
   }
 }
 
