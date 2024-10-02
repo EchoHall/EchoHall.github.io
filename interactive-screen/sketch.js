@@ -7,14 +7,8 @@ let og_spot_circley;
 
 let falling_rate = 5;
 
-let rain_y = radius/2;
-let rain_x = 500;
-
-
-let cat_x = -500;
-let cat_y = -radius/2;
-
-let Iscat = false;
+let cat_x = 500;
+let cat_y = radius/2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -23,14 +17,11 @@ function setup() {
 
 function draw() {
   background("skyblue");
+  
   create_cat();
-  small_ball();
   
   main_catcher();
-  if (keyIsDown(65)){
-    Iscat = !Iscat;
-  }
-  fall_small_rain_or_cat();
+  fall_cat()
   
 }
 
@@ -48,21 +39,8 @@ function main_catcher(){
   circle(mouseX + radius, height - radius/2, radius);
 }
 
-function fall_small_rain_or_cat(){
-  //movement of small rain
-  if (!Iscat){
-    if (rain_y > 0 ) {
-      rain_y = rain_y + falling_rate;
-    }
-    
-    if (rain_y > height){
-      rain_y = 0 + radius/2;
-      rain_x = random(0, width);
-    }
-  }
-  //movement of cats
-  else if (Iscat){
-    
+function fall_cat(){
+
     if (cat_y > 0 ) {
       cat_y = cat_y + falling_rate;
     }
@@ -71,27 +49,10 @@ function fall_small_rain_or_cat(){
       cat_y = 0 + radius/2;
       cat_x = random(0, width);
     }
-  }
-}
-  
-
-
-function small_ball(){
-  // small balls
-  fill("blue");
-  if(keyIsDown(65)){
-    rain_x = -rain_x
-    rain_y = -rain_y
-  }
-  circle(rain_x, rain_y, radius/2);
 }
 
 function create_cat(){
   fill("green");
-  if(keyIsDown(65)){a
-    cat_x = -cat_x
-    cat_y = -cat_y
-  }
   circle(cat_x, cat_y, radius/2);
 
   //cat's ear
