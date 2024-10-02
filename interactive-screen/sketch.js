@@ -1,36 +1,37 @@
 //Quan Le
-
+//
 
 let radius = 80;
 let og_spot_circlex;
 let og_spot_circley;
 
 let falling_rate = 5;
+
 let rain_y = radius/2;
 let rain_x = 500;
-let falling_length = 0;
 
-let cat_x = -rain_x;
-let cat_y = -rain_y;
+
+let cat_x = -500;
+let cat_y = -radius/2;
 
 let Iscat = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
+
 }
 
 function draw() {
   background("skyblue");
-
+  create_cat();
   small_ball();
   
   main_catcher();
-  
+  if (keyIsDown(65)){
+    Iscat = !Iscat;
+  }
   fall_small_rain_or_cat();
-
-  create_cat();
-
+  
 }
 
 function main_catcher(){
@@ -59,8 +60,9 @@ function fall_small_rain_or_cat(){
       rain_x = random(0, width);
     }
   }
-
+  //movement of cats
   else if (Iscat){
+    
     if (cat_y > 0 ) {
       cat_y = cat_y + falling_rate;
     }
@@ -70,28 +72,30 @@ function fall_small_rain_or_cat(){
       cat_x = random(0, width);
     }
   }
-
-  if(mouseIsPressed){
-    Iscat = !Iscat;
-    rain_x = -rain_x;
-    rain_y = -rain_y;
-  }
 }
+  
+
 
 function small_ball(){
   // small balls
   fill("blue");
+  if(keyIsDown(65)){
+    rain_x = -rain_x
+    rain_y = -rain_y
+  }
   circle(rain_x, rain_y, radius/2);
 }
 
 function create_cat(){
   fill("green");
+  if(keyIsDown(65)){a
+    cat_x = -cat_x
+    cat_y = -cat_y
+  }
   circle(cat_x, cat_y, radius/2);
 
   //cat's ear
   triangle(cat_x + radius/2/2, cat_y - radius/2/2, cat_x, cat_y - radius/2/2, cat_x + radius/2/2, cat_y - radius);
-  triangle(cat_x - radius/2/2, cat_y - radius/2/2, cat_x, cat_y - radius/2/2, cat_x - radius/2/2, cat_y - radius);
-
-  //cat's whisker
-
+  
+  triangle(cat_x - radius/2/2, cat_y - radius/2/2, cat_x, cat_y -  radius/2/2, cat_x - radius/2/2, cat_y - radius);
 }
