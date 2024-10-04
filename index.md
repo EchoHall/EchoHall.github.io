@@ -7,5 +7,7 @@
 
 - [bouncing Balls](bouncing-balls)
 
+- [generative art](art)
+
 ## Project
 - [interactive Screen](interactive-screen)
