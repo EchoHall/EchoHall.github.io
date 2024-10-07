@@ -11,5 +11,7 @@
 
 -[Perlin Noise Ball](perlin)
 
+-[terrain generation](terrain)
+
 ## Project
 - [interactive Screen](interactive-screen)
