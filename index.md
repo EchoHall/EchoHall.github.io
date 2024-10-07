@@ -9,5 +9,7 @@
 
 - [generative art](art)
 
+-[Perlin Noise Ball](perlin)
+
 ## Project
 - [interactive Screen](interactive-screen)
