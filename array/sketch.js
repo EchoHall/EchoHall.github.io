@@ -6,10 +6,12 @@
 // - describe what you did to take this project "above and beyond"
 
 let cellSize = 80;
+let cellSizeLocation = [0, 1, 2, 3, 4, 5, 6, 7];
 
 let boardx;
 let boardy;
 let purpleBall;
+let redBall;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -19,7 +21,7 @@ function setup() {
 
 
   purpleBall = {
-    x: boardx + cellSize/2,
+    x: boardx + cellSize/2 + cellSize,
     y: boardy + cellSize/2,
     size: 65,
     color: "purple",
@@ -36,6 +38,7 @@ function draw() {
 }
 
 function makeGrid(){
+  fill("white");
   for (let y = 0; y < 8; y++) {
     for (let x = 0; x < 8; x++) {
       square(boardx + x * cellSize, boardy + y * cellSize, cellSize);
