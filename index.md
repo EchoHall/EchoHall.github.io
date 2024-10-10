@@ -13,6 +13,8 @@
 
 -[terrain generation](terrain)
 
+-[Bubble Demo](bubble)
+
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
