@@ -6,7 +6,8 @@
 // - describe what you did to take this project "above and beyond"
 
 let cellSize = 80;
-let cellSizeLocation = [0, 1, 2, 3, 4, 5, 6, 7];
+let cellSizeLocationX = [0, 1, 2, 3, 4, 5, 6, 7];
+let cellSizeLocationY = [0, 1, 2, 3, 4, 5, 6, 7];
 
 let boardx;
 let boardy;
@@ -19,22 +20,31 @@ function setup() {
   boardy = height/8;
   boardx = width/4;
 
-
   purpleBall = {
-    x: boardx + cellSize/2 + cellSize,
+    x: boardx + cellSize/2,
     y: boardy + cellSize/2,
     size: 65,
     color: "purple",
   };
 
+  redBall = {
+    x: boardx + cellSize/2,
+    y: boardy + cellSize/2,
+    size: 65,
+    color: "red",
+  };
+
+  makeGrid();
+  makeOrb();
+
 }
 
 function draw() {
-  background(220);
 
-  makeGrid();
 
-  makeOrb();
+  // makeGrid();
+  // makeOrb();
+
 }
 
 function makeGrid(){
@@ -47,6 +57,21 @@ function makeGrid(){
 }
 
 function makeOrb(){
-  circle(purpleBall.x, purpleBall.y, purpleBall.size);
-  fill(purpleBall.color);
+  let randomLocationX = purpleBall.x;
+  let randomLocationY = purpleBall.y;
+
+  for(let purple = 0; purple< 8; purple++){
+
+    circle(randomLocationX, randomLocationY, purpleBall.size);
+
+    randomLocationX = purpleBall.x + cellSize*random(cellSizeLocationX);
+    randomLocationY = purpleBall.y + cellSize*random(cellSizeLocationY);
+
+    for(let red= 0; red < 8; red++) {
+      circle(randomLocationX + cellSize*random(cellSizeLocationX) , randomLocationY + cellSize*random(cellSizeLocationY), redBall.size);
+      randomLocationX = redBall.x + cellSize*random(cellSizeLocationX);
+      randomLocationY = redBall.y + cellSize*random(cellSizeLocationY);
+    }
+
+  }
 }
