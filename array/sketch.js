@@ -6,8 +6,14 @@
 // - describe what you did to take this project "above and beyond"
 
 let cellSize = 80;
-let cellSizeLocationX = [0, 1, 2, 3, 4, 5, 6, 7];
-let cellSizeLocationY = [0, 1, 2, 3, 4, 5, 6, 7];
+let cellSizeLocationXPurple = [0, 1, 2, 3, 4, 5, 6, 7];
+let cellSizeLocationYPurple = [0, 1, 2, 3, 4, 5, 6, 7];
+
+let cellSizeLocationXRed = [0, 1, 2, 3, 4, 5, 6, 7];
+let cellSizeLocationYRed = [0, 1, 2, 3, 4, 5, 6, 7];
+
+let theOrbsX = [];
+let theOrbsY = [];
 
 let boardx;
 let boardy;
@@ -43,7 +49,7 @@ function draw() {
 
 
   // makeGrid();
-  // makeOrb();
+  //makeOrb();
 
 }
 
@@ -56,22 +62,33 @@ function makeGrid(){
   }
 }
 
-function makeOrb(){
-  let randomLocationX = purpleBall.x;
-  let randomLocationY = purpleBall.y;
+// function makeOrb(){
+//   let randomLocationX = purpleBall.x;
+//   let randomLocationY = purpleBall.y;
 
-  for(let purple = 0; purple< 8; purple++){
+//   for(let purple = 0; purple< 8; purple++){
+//     fill("purple");
 
-    circle(randomLocationX, randomLocationY, purpleBall.size);
+//     circle(randomLocationX, randomLocationY, purpleBall.size);
 
-    randomLocationX = purpleBall.x + cellSize*random(cellSizeLocationX);
-    randomLocationY = purpleBall.y + cellSize*random(cellSizeLocationY);
+//     randomLocationX = purpleBall.x + cellSize*random(cellSizeLocationXPurple);
+//     randomLocationY = purpleBall.y + cellSize*random(cellSizeLocationYPurple);
 
-    for(let red= 0; red < 8; red++) {
-      circle(randomLocationX + cellSize*random(cellSizeLocationX) , randomLocationY + cellSize*random(cellSizeLocationY), redBall.size);
-      randomLocationX = redBall.x + cellSize*random(cellSizeLocationX);
-      randomLocationY = redBall.y + cellSize*random(cellSizeLocationY);
-    }
 
-  }
+//     for(let red= 0; red < 4; red++) {
+
+//       circle(redBall.x + cellSize*random(cellSizeLocationXRed) , redBall.y + cellSize*random(cellSizeLocationYRed), redBall.size);
+//       randomLocationX = redBall.x + cellSize*random(cellSizeLocationXRed);
+//       randomLocationY = redBall.y + cellSize*random(cellSizeLocationYRed);
+//       fill("red");
+//     }
+
+//   }
+// }
+
+function locateOrbs() {
+  let randomLocationX = [0, 1, 2, 3, 4, 5, 6, 7];
+  let randomLocationY = [0, 1, 2, 3, 4, 5, 6, 7];
+
+  circle(redBall.x + cellSize*random(cellSizeLocationXRed) , redBall.y + cellSize*random(cellSizeLocationYRed), redBall.size);
 }
