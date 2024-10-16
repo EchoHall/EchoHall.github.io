@@ -6,11 +6,11 @@
 // - describe what you did to take this project "above and beyond"
 
 let cellSize = 80;
-let cellSizeLocationXPurple = [0, 1, 2, 3, 4, 5, 6, 7];
-let cellSizeLocationYPurple = [0, 1, 2, 3, 4, 5, 6, 7];
+// let cellSizeLocationXPurple = [0, 1, 2, 3, 4, 5, 6, 7];
+// let cellSizeLocationYPurple = [0, 1, 2, 3, 4, 5, 6, 7];
 
-let cellSizeLocationXRed = [0, 1, 2, 3, 4, 5, 6, 7];
-let cellSizeLocationYRed = [0, 1, 2, 3, 4, 5, 6, 7];
+// let cellSizeLocationXRed = [0, 1, 2, 3, 4, 5, 6, 7];
+// let cellSizeLocationYRed = [0, 1, 2, 3, 4, 5, 6, 7];
 
 let theOrbsX = [];
 let theOrbsY = [];
@@ -22,7 +22,7 @@ let redBall;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
- 
+  //defining
   boardy = height/8;
   boardx = width/4;
 
@@ -40,8 +40,12 @@ function setup() {
     color: "red",
   };
 
+  //loading 
+
   makeGrid();
+  locateOrbs();
   makeOrb();
+
 
 }
 
@@ -90,5 +94,40 @@ function locateOrbs() {
   let randomLocationX = [0, 1, 2, 3, 4, 5, 6, 7];
   let randomLocationY = [0, 1, 2, 3, 4, 5, 6, 7];
 
-  circle(redBall.x + cellSize*random(cellSizeLocationXRed) , redBall.y + cellSize*random(cellSizeLocationYRed), redBall.size);
+  for(let purple = 0; purple < 8; purple++){
+
+    theRandomNumberX = random(randomLocationX);
+    theRandomNumberY = random(randomLocationY);
+
+    
+
+    for(let order =  0; order < 8; order++){
+
+      let reduceRandomLocationX = randomLocationX.splice(order, order);
+      let reduceRandomLocationY = randomLocationY.splice(order, order);
+
+      randomLocationY.splice(order, order);
+      randomLocationX.splice(order, order);
+
+      if (theRandomNumberX === theOrbsX[order]){
+        theRandomNumberX = random(reduceRandomLocationX);
+      }
+
+      if (theRandomNumberY === theOrbsY[order]){
+        theRandomNumberY = random(reduceRandomLocationY);
+      }
+      
+      theOrbsX.push(theRandomNumberX);
+      theOrbsY.push(theRandomNumberY);
+    }
+
+
+  }
+
+}
+
+function makeOrb(){
+  for(let purple = 0; purple < 8; purple++){
+    circle(purpleBall.x + cellSize*theOrbsX, purpleBall.y + cellSize*theOrbsY, purpleBall.size);
+  }
 }
