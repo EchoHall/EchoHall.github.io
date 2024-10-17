@@ -15,6 +15,8 @@
 
 -[Bubble Demo](bubble)
 
+-[Translate](translate)
+
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
