@@ -2,6 +2,7 @@
 // Quan Le
 // October 8th
 //
+// SOURCE: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
@@ -12,8 +13,12 @@ let cellSize = 80;
 // let cellSizeLocationXRed = [0, 1, 2, 3, 4, 5, 6, 7];
 // let cellSizeLocationYRed = [0, 1, 2, 3, 4, 5, 6, 7];
 
-let theOrbsX = [];
-let theOrbsY = [];
+let theOrbs = [];
+
+const movementAmount = [
+  let 
+];
+
 
 let boardx;
 let boardy;
@@ -31,6 +36,7 @@ function setup() {
     y: boardy + cellSize/2,
     size: 65,
     color: "purple",
+    characteristic: [],
   };
 
   redBall = {
@@ -91,39 +97,17 @@ function makeGrid(){
 // }
 
 function locateOrbs() {
-  let randomLocationX = [0, 1, 2, 3, 4, 5, 6, 7];
-  let randomLocationY = [0, 1, 2, 3, 4, 5, 6, 7];
+  for(let purple = 0; purple < 8; purple++) {
+    let theRandomNumberX = 0;
+    let theRandomNumberY = 0;
 
-  for(let purple = 0; purple < 8; purple++){
-
-    theRandomNumberX = random(randomLocationX);
-    theRandomNumberY = random(randomLocationY);
+    theRandomNumberX = random(movementAmountX);
+    theRandomNumberY = random(movementAmountY);
 
     
-
-    for(let order =  0; order < 8; order++){
-
-      let reduceRandomLocationX = randomLocationX.splice(order, order);
-      let reduceRandomLocationY = randomLocationY.splice(order, order);
-
-      randomLocationY.splice(order, order);
-      randomLocationX.splice(order, order);
-
-      if (theRandomNumberX === theOrbsX[order]){
-        theRandomNumberX = random(reduceRandomLocationX);
-      }
-
-      if (theRandomNumberY === theOrbsY[order]){
-        theRandomNumberY = random(reduceRandomLocationY);
-      }
-      
-      theOrbsX.push(theRandomNumberX);
-      theOrbsY.push(theRandomNumberY);
-    }
-
-
+    
+    theOrbs.push(theRandomNumberX);
   }
-
 }
 
 function makeOrb(){
