@@ -15,10 +15,11 @@ let cellSize = 80;
 
 let theOrbs = [];
 
-const movementAmount = [
-  
-];
+const movementAmount = [0, 1, 2, 3, 4, 5, 6, 7];
 
+let theRandomNumberX;
+let theRandomNumberY;
+let totalAmount = 0;
 
 let boardx;
 let boardy;
@@ -50,7 +51,7 @@ function setup() {
 
   makeGrid();
   locateOrbs();
-  makeOrb();
+
 
 
 }
@@ -98,20 +99,37 @@ function makeGrid(){
 
 function locateOrbs() {
   for(let purple = 0; purple < 8; purple++) {
-    let theRandomNumberX = 0;
-    let theRandomNumberY = 0;
+    theRandomNumberX = random(movementAmount);
+    theRandomNumberY = random(movementAmount);
 
-    theRandomNumberX = random(movementAmountX);
-    theRandomNumberY = random(movementAmountY);
+    let isNewLocation = true;
+    
 
+    // totalAmount = theRandomNumberX/theRandomNumberY;
+
+    // for (let orb of theOrbs) {
+    //   if (orb.)
+    // }
+    // if (totalAmount === theOrbs[purple]){
+    //   theRandomNumberX = random(movementAmount);
+    //   theRandomNumberY = random(movementAmount);
+
+    //   totalAmount = theRandomNumberX/theRandomNumberY;
+    // }
     
-    
-    theOrbs.push(theRandomNumberX);
+    // theOrbs.push(totalAmount);
+
+    let newOrb = {
+      x: theRandomNumberX,
+      y: theRandomNumberY,
+      color: "purple",
+    };
+    theOrbs.push(newOrb);
+
+    // makeOrb();
   }
 }
 
 function makeOrb(){
-  for(let purple = 0; purple < 8; purple++){
-    circle(purpleBall.x + cellSize*theOrbsX, purpleBall.y + cellSize*theOrbsY, purpleBall.size);
-  }
+  circle(purpleBall.x + cellSize* theRandomNumberY*totalAmount, purpleBall.y + cellSize* (theRandomNumberX/totalAmount), purpleBall.size);
 }
