@@ -16,7 +16,7 @@ let cellSize = 80;
 let theOrbs = [];
 
 const movementAmount = [
-  let 
+  
 ];
 
 
