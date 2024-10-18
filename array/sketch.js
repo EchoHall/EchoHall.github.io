@@ -7,19 +7,11 @@
 // - describe what you did to take this project "above and beyond"
 
 let cellSize = 80;
-// let cellSizeLocationXPurple = [0, 1, 2, 3, 4, 5, 6, 7];
-// let cellSizeLocationYPurple = [0, 1, 2, 3, 4, 5, 6, 7];
-
-// let cellSizeLocationXRed = [0, 1, 2, 3, 4, 5, 6, 7];
-// let cellSizeLocationYRed = [0, 1, 2, 3, 4, 5, 6, 7];
 
 let theOrbs = [];
 
 const movementAmount = [0, 1, 2, 3, 4, 5, 6, 7];
 
-let theRandomNumberX;
-let theRandomNumberY;
-let totalAmount = 0;
 
 let boardx;
 let boardy;
@@ -31,28 +23,12 @@ function setup() {
   //defining
   boardy = height/8;
   boardx = width/4;
-
-  purpleBall = {
-    x: boardx + cellSize/2,
-    y: boardy + cellSize/2,
-    size: 65,
-    color: "purple",
-    characteristic: [],
-  };
-
-  redBall = {
-    x: boardx + cellSize/2,
-    y: boardy + cellSize/2,
-    size: 65,
-    color: "red",
-  };
-
   //loading 
 
   makeGrid();
   locateOrbs();
 
-
+  makeOrb();
 
 }
 
@@ -98,38 +74,47 @@ function makeGrid(){
 // }
 
 function locateOrbs() {
-  for(let purple = 0; purple < 8; purple++) {
+  for(let orb = 0; orb < 8; orb++) {
     theRandomNumberX = random(movementAmount);
     theRandomNumberY = random(movementAmount);
-
-    let isNewLocation = true;
     
-
-    // totalAmount = theRandomNumberX/theRandomNumberY;
-
-    // for (let orb of theOrbs) {
-    //   if (orb.)
-    // }
-    // if (totalAmount === theOrbs[purple]){
-    //   theRandomNumberX = random(movementAmount);
-    //   theRandomNumberY = random(movementAmount);
-
-    //   totalAmount = theRandomNumberX/theRandomNumberY;
-    // }
-    
-    // theOrbs.push(totalAmount);
-
-    let newOrb = {
-      x: theRandomNumberX,
-      y: theRandomNumberY,
-      color: "purple",
+    let newOrbs = {
+      x:  theRandomNumberX,
+      y:  theRandomNumberY,
+      size: 65,
+      color: ["red","green", "orange", "blue", "yellow", "black", "white"],
     };
-    theOrbs.push(newOrb);
+    
+    //schellenberg helped with this...
+    let isNewLocation = false; 
+    while (!isNewLocation) {
+      for (let theOrb of theOrbs) {
+        if (theOrb.x === newOrbs.x && theOrb.y === newOrbs.y) {
+          newOrbs.x = random(movementAmount);
+          newOrbs.y = random(movementAmount);
+        }
+      }
+      isNewLocation = true;
+    }
 
-    // makeOrb();
+    theOrbs.push(newOrbs);
+
   }
 }
 
+// function checkLocation(){
+//   let isNewLocation = false; 
+//   while (!isNewLocation) {
+//     for (let theOrb of theOrbs) {
+//       if (theOrb.x === newOrbs.x && theOrb.y === newOrbs.y) {
+        
+//       }
+//     }
+//   }
+// }
+
 function makeOrb(){
-  circle(purpleBall.x + cellSize* theRandomNumberY*totalAmount, purpleBall.y + cellSize* (theRandomNumberX/totalAmount), purpleBall.size);
+  for(let anOrb of theOrbs){
+    circle(+ width/4 + cellSize*anOrb.x, height/8 + cellSize*anOrb.y, anOrb.size);
+  }
 }
