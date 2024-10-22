@@ -17,6 +17,8 @@
 
 -[Translate](translate)
 
+-[Grid Demo](grid)
+
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
