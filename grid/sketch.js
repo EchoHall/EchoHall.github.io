@@ -28,10 +28,46 @@ function setup() {
 
 }
 
+function windowResized(){
+  if(windowWidth > windowHeight){
+    resizeCanvas(windowWidth, windowHeight);
+  }
+
+  else{
+    resizeCanvas(windowHeight, windowWidth);
+  }
+  cellSize = height/GRIDSIZE;
+}
+
 function draw() {
   background(220);
   displayGrid();
 
+}
+
+function mousePressed(){
+  let x = Math.floor(mouseX/cellSize);
+  let y = Math.floor(mouseY/cellSize);
+
+  toggleCel(x, y);
+
+  toggleCel(x-1,y);
+  toggleCel(x+1,y);
+  toggleCel(x,y-1);
+  toggleCel(x,y+1);
+}
+
+function toggleCel(x, y){
+  //make sure cell in grid
+  if(x >= 0 && x < GRIDSIZE && x >= 0 && y < GRIDSIZE){
+    if(grid[y][x] === 0){
+      grid[y][x] = 1;
+    }
+
+    else if (grid[y][x] === 1){
+      grid[y][x] = 0;
+    }
+  }
 }
 
 function keyPressed(){
