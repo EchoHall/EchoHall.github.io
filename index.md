@@ -19,6 +19,7 @@
 
 -[Grid Demo](grid)
 
+-[rectangular Grid](rectangular-gird)
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
