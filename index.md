@@ -23,3 +23,4 @@
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
+- [Grid based game](grid-project)
