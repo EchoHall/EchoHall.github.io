@@ -9,9 +9,11 @@ const OPEN_TILE = 0;
 const IMPASSIBLE = 1;
 const PLAYER = 9;
 let thePlayer = {
-  x: 0, 
+  x: 2, 
   y: 0,
 };
+
+let isProtecting = false;
 
 
 function setup() {
@@ -22,7 +24,7 @@ function setup() {
     createCanvas(windowHeight, windowHeight);
   }
   cellSize = height/GRID_SIZE;
-  grid = generateRandomGrid(GRID_SIZE, GRID_SIZE);
+  grid = generateGrid(GRID_SIZE, GRID_SIZE);
 
   //add player to the grid
   grid[thePlayer.y][thePlayer.x] = PLAYER;
@@ -41,27 +43,14 @@ function windowResized() {
 function draw() {
   background(220);
   displayGrid();
+  loadShield();
 }
 
 function mousePressed() {
-  let y = Math.floor(thePlayer.y/cellSize);
-
-  shootLaser(y);
-}
-
-function shootLaser(y) {
-  grid[y] = laser;
+  isProtecting = !isProtecting;
 }
 
 function keyPressed() {
-  if (key === "r") {
-    grid = generateRandomGrid(GRID_SIZE, GRID_SIZE);
-  }
-  if (key === "e") {
-    grid = generateEmptyGrid(GRID_SIZE, GRID_SIZE);
-  }
-
-
   if (key === "s") {
     //move down
     movePlayer(thePlayer.x, thePlayer.y + 1);
@@ -103,31 +92,56 @@ function displayGrid() {
       }
       else if (grid[y][x] === PLAYER) {
         fill("red");
-        square(x * cellSize, y * cellSize, cellSize);
+        
+      }
+      square(x * cellSize, y * cellSize, cellSize);
+    }
+  }
+}
+
+
+function generateGrid(cols, rows) {
+  let newGrid = [];
+  for (let y = 0; y < rows; y++) {
+    newGrid.push([]);
+    for (let x = 0; x < cols; x++) {
+      newGrid[y].push(OPEN_TILE);
+    }
+  }
+  return newGrid;
+}
+
+function loadShield(){
+  for (let y = 0; y < GRID_SIZE; y++) {
+    for (let x = 0; x < GRID_SIZE; x++) {
+      if (grid[y][x] === PLAYER) {
+        if (isProtecting){
+          fill("yellow");
+          square((x+1) * cellSize, y * cellSize, cellSize);
+        }
+  
+        else{
+          fill("white");
+          square((x+1) * cellSize, y * cellSize, cellSize);
+        }
       }
     }
   }
 }
 
-
-function generateRandomGrid(cols, rows) {
-  let newGrid = [];
-  for (let y = 0; y < rows; y++) {
-    newGrid.push([]);
-    for (let x = 0; x < cols; x++) {
-      newGrid[y].push(OPEN_TILE);
-    }
-  }
-  return newGrid;
-}
-
-function generateEmptyGrid(cols, rows) {
-  let newGrid = [];
-  for (let y = 0; y < rows; y++) {
-    newGrid.push([]);
-    for (let x = 0; x < cols; x++) {
-      newGrid[y].push(OPEN_TILE);
-    }
-  }
-  return newGrid;
-}
+// function loadEnemies(){
+//   for (let y = 0; y < GRID_SIZE; y++) {
+//     for (let x = 0; x < GRID_SIZE; x++) {
+//       if (grid[y][x] === PLAYER) {
+//         if (isProtecting){
+//           fill("yellow");
+//         }
+  
+//         else{
+//           fill("white");
+//         }
+//         square((x+1) * cellSize, y * cellSize, cellSize);
+//       }
+//     }
+//   }
+// }
