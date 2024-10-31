@@ -13,6 +13,12 @@ let thePlayer = {
   y: 0,
 };
 
+const ENEMY = 10;
+let theEnemy = {
+  x: 10,
+  y: 10,
+};
+
 let isProtecting = false;
 
 
@@ -26,8 +32,9 @@ function setup() {
   cellSize = height/GRID_SIZE;
   grid = generateGrid(GRID_SIZE, GRID_SIZE);
 
-  //add player to the grid
+  //add character to the grid
   grid[thePlayer.y][thePlayer.x] = PLAYER;
+  // grid[theEnemy.y][theEnemy.x] = ENEMY;
 }
 
 function windowResized() {
@@ -90,9 +97,14 @@ function displayGrid() {
       if (grid[y][x] === OPEN_TILE) {
         fill("white");
       }
+      
       else if (grid[y][x] === PLAYER) {
         fill("red");
         
+      }
+      
+      else if(grid[y][x] === ENEMY){
+        fill("purple");
       }
       square(x * cellSize, y * cellSize, cellSize);
     }
@@ -132,16 +144,7 @@ function loadShield(){
 // function loadEnemies(){
 //   for (let y = 0; y < GRID_SIZE; y++) {
 //     for (let x = 0; x < GRID_SIZE; x++) {
-//       if (grid[y][x] === PLAYER) {
-//         if (isProtecting){
-//           fill("yellow");
-//         }
-  
-//         else{
-//           fill("white");
-//         }
-//         square((x+1) * cellSize, y * cellSize, cellSize);
-//       }
+
 //     }
 //   }
 // }
