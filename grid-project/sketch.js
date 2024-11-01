@@ -19,6 +19,8 @@ let theEnemy = {
   y: 10,
 };
 
+let theAmountOfTime = 5;
+
 let isProtecting = false;
 
 
@@ -129,22 +131,18 @@ function loadShield(){
       if (grid[y][x] === PLAYER) {
         if (isProtecting){
           fill("yellow");
-          square((x+1) * cellSize, y * cellSize, cellSize);
         }
   
         else{
           fill("white");
-          square((x+1) * cellSize, y * cellSize, cellSize);
         }
+        square((x+1) * cellSize, y * cellSize, cellSize);
       }
     }
   }
 }
 
-// function loadEnemies(){
-//   for (let y = 0; y < GRID_SIZE; y++) {
-//     for (let x = 0; x < GRID_SIZE; x++) {
-      
-//     }
-//   }
-// }
+function loadEnemies(){
+  fill("black");
+  square(GRID_SIZE * cellSize, random(GRID_SIZE) * cellSize, cellSize);
+}
