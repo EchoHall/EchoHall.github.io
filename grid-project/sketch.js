@@ -144,7 +144,7 @@ function loadShield(){
 // function loadEnemies(){
 //   for (let y = 0; y < GRID_SIZE; y++) {
 //     for (let x = 0; x < GRID_SIZE; x++) {
-
+      
 //     }
 //   }
 // }
