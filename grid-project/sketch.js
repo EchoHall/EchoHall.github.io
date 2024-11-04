@@ -15,11 +15,9 @@ let thePlayer = {
 
 const ENEMY = 10;
 let theEnemy = {
-  x: 10,
-  y: 10,
+  x: 9,
+  y: 9,
 };
-
-let theAmountOfTime = 5;
 
 let isProtecting = false;
 
@@ -36,7 +34,7 @@ function setup() {
 
   //add character to the grid
   grid[thePlayer.y][thePlayer.x] = PLAYER;
-  // grid[theEnemy.y][theEnemy.x] = ENEMY;
+  grid[theEnemy.y][theEnemy.x] = ENEMY;
 }
 
 function windowResized() {
@@ -63,11 +61,13 @@ function keyPressed() {
   if (key === "s") {
     //move down
     movePlayer(thePlayer.x, thePlayer.y + 1);
+    moveEnemy(theEnemy.x - 1, theEnemy.y);
   }
 
   if (key === "w") {
     //move up
     movePlayer(thePlayer.x, thePlayer.y - 1);
+    moveEnemy(theEnemy.x - 1, theEnemy.y);
   }
 }
 
@@ -89,7 +89,21 @@ function movePlayer(x, y) {
     //put the player into the grid
     grid[thePlayer.y][thePlayer.x] = PLAYER;
   }
+}
 
+function moveEnemy(enemyX,enemyY){
+  if (x >= 0 && x < GRID_SIZE && y < GRID_SIZE) {
+
+    let oldEnemyX = theEnemy.x;
+    let oldEnemyY = theEnemy.y;
+  
+    theEnemy.x = enemyX;
+    theEnemy.y = enemyY;
+  
+    grid[oldEnemyY][oldEnemyX] = OPEN_TILE;
+  
+    grid[theEnemy.y][theEnemy.x] = ENEMY;
+  }
 }
 
 
@@ -102,7 +116,6 @@ function displayGrid() {
       
       else if (grid[y][x] === PLAYER) {
         fill("red");
-        
       }
       
       else if(grid[y][x] === ENEMY){
@@ -132,7 +145,7 @@ function loadShield(){
         if (isProtecting){
           fill("yellow");
         }
-  
+
         else{
           fill("white");
         }
@@ -140,9 +153,4 @@ function loadShield(){
       }
     }
   }
-}
-
-function loadEnemies(){
-  fill("black");
-  square(GRID_SIZE * cellSize, random(GRID_SIZE) * cellSize, cellSize);
 }
