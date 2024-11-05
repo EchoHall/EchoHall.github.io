@@ -92,7 +92,7 @@ function movePlayer(x, y) {
 }
 
 function moveEnemy(enemyX,enemyY){
-  if (x >= 0 && x < GRID_SIZE && y < GRID_SIZE) {
+  if (x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE && grid[y][x] === OPEN_TILE) {
 
     let oldEnemyX = theEnemy.x;
     let oldEnemyY = theEnemy.y;
