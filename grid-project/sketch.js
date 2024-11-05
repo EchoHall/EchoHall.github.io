@@ -6,8 +6,8 @@ let grid;
 let cellSize;
 const GRID_SIZE = 10;
 const OPEN_TILE = 0;
-const IMPASSIBLE = 1;
 const PLAYER = 9;
+
 let thePlayer = {
   x: 2, 
   y: 0,
@@ -18,6 +18,8 @@ let theEnemy = {
   x: 9,
   y: 9,
 };
+
+let pace = 6;
 
 let isProtecting = false;
 
@@ -50,7 +52,6 @@ function windowResized() {
 function draw() {
   background(220);
   displayGrid();
-  loadShield();
 }
 
 function mousePressed() {
@@ -61,13 +62,11 @@ function keyPressed() {
   if (key === "s") {
     //move down
     movePlayer(thePlayer.x, thePlayer.y + 1);
-    moveEnemy(theEnemy.x - 1, theEnemy.y);
   }
 
   if (key === "w") {
     //move up
     movePlayer(thePlayer.x, thePlayer.y - 1);
-    moveEnemy(theEnemy.x - 1, theEnemy.y);
   }
 }
 
@@ -92,17 +91,26 @@ function movePlayer(x, y) {
 }
 
 function moveEnemy(enemyX,enemyY){
-  if (x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE && grid[y][x] === OPEN_TILE) {
+  if (frameCount % pace === 0){
+    theEnemy.x -= 1;
+  }
 
-    let oldEnemyX = theEnemy.x;
-    let oldEnemyY = theEnemy.y;
-  
-    theEnemy.x = enemyX;
-    theEnemy.y = enemyY;
-  
-    grid[oldEnemyY][oldEnemyX] = OPEN_TILE;
-  
-    grid[theEnemy.y][theEnemy.x] = ENEMY;
+  else if(grid[y][x] === OPEN_TILE){
+    
+  }
+
+  else if (x < 0){
+    theEnemy.x = 9;
+    theEnemy. y = random(9);
+  }
+
+  else if (isProtecting && grid[y][x] === PLAYER){
+    theEnemy.x = 9;
+    theEnemy. y = random(9);
+  }
+
+  else if (isProtecting && grid[y][x] === PLAYER){
+    
   }
 }
 
@@ -115,7 +123,13 @@ function displayGrid() {
       }
       
       else if (grid[y][x] === PLAYER) {
-        fill("red");
+        if (isProtecting){
+          fill("yellow");
+        }
+
+        else{
+          fill("red");
+        }
       }
       
       else if(grid[y][x] === ENEMY){
@@ -136,21 +150,4 @@ function generateGrid(cols, rows) {
     }
   }
   return newGrid;
-}
-
-function loadShield(){
-  for (let y = 0; y < GRID_SIZE; y++) {
-    for (let x = 0; x < GRID_SIZE; x++) {
-      if (grid[y][x] === PLAYER) {
-        if (isProtecting){
-          fill("yellow");
-        }
-
-        else{
-          fill("white");
-        }
-        square((x+1) * cellSize, y * cellSize, cellSize);
-      }
-    }
-  }
 }
