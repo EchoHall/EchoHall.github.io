@@ -20,8 +20,9 @@ let theEnemy = {
 };
 
 let pace = 6;
-
+let shieldDuration = 500;
 let isProtecting = false;
+let lastTimeSwitched = 0;
 
 
 function setup() {
@@ -52,10 +53,11 @@ function windowResized() {
 function draw() {
   background(220);
   displayGrid();
+  delayShield();
 }
 
 function mousePressed() {
-  isProtecting = !isProtecting;
+  isProtecting = true;
 }
 
 function keyPressed() {
@@ -90,7 +92,7 @@ function movePlayer(x, y) {
   }
 }
 
-function moveEnemy(enemyX,enemyY){
+function moveEnemy(){
   if (frameCount % pace === 0){
     theEnemy.x -= 1;
   }
@@ -125,10 +127,15 @@ function displayGrid() {
       else if (grid[y][x] === PLAYER) {
         if (isProtecting){
           fill("yellow");
+          lastTimeSwitched = millis();
         }
 
-        else{
+        else if (!isProtecting){
           fill("red");
+        }
+        
+        if(millis() > lastTimeSwitched + shieldDuration) {
+          isProtecting = !isProtecting;
         }
       }
       
