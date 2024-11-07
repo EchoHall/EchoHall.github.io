@@ -6,8 +6,8 @@ let grid;
 let cellSize;
 const GRID_SIZE = 10;
 const OPEN_TILE = 0;
+const IMPASSIBLE = 1;
 const PLAYER = 9;
-
 let thePlayer = {
   x: 2, 
   y: 0,
@@ -19,11 +19,9 @@ let theEnemy = {
   y: 9,
 };
 
-let pace = 6;
-let shieldDuration = 500;
 let isProtecting = false;
 let lastTimeSwitched = 0;
-
+let delayTime = 1000;
 
 function setup() {
   if (windowWidth < windowHeight) {
@@ -53,11 +51,12 @@ function windowResized() {
 function draw() {
   background(220);
   displayGrid();
+  loadShield();
   delayShield();
 }
 
 function mousePressed() {
-  isProtecting = true;
+  isProtecting = !isProtecting;
 }
 
 function keyPressed() {
@@ -92,30 +91,6 @@ function movePlayer(x, y) {
   }
 }
 
-function moveEnemy(){
-  if (frameCount % pace === 0){
-    theEnemy.x -= 1;
-  }
-
-  else if(grid[y][x] === OPEN_TILE){
-    
-  }
-
-  else if (x < 0){
-    theEnemy.x = 9;
-    theEnemy. y = random(9);
-  }
-
-  else if (isProtecting && grid[y][x] === PLAYER){
-    theEnemy.x = 9;
-    theEnemy. y = random(9);
-  }
-
-  else if (isProtecting && grid[y][x] === PLAYER){
-    
-  }
-}
-
 
 function displayGrid() {
   for (let y = 0; y < GRID_SIZE; y++) {
@@ -125,18 +100,7 @@ function displayGrid() {
       }
       
       else if (grid[y][x] === PLAYER) {
-        if (isProtecting){
-          fill("yellow");
-          lastTimeSwitched = millis();
-        }
-
-        else if (!isProtecting){
-          fill("red");
-        }
-        
-        if(millis() > lastTimeSwitched + shieldDuration) {
-          isProtecting = !isProtecting;
-        }
+        fill("red");
       }
       
       else if(grid[y][x] === ENEMY){
@@ -157,4 +121,29 @@ function generateGrid(cols, rows) {
     }
   }
   return newGrid;
+}
+
+function loadShield(){
+  for (let y = 0; y < GRID_SIZE; y++) {
+    for (let x = 0; x < GRID_SIZE; x++) {
+      if (grid[y][x] === PLAYER) {
+        if (isProtecting){
+          fill("yellow");
+        }
+
+        else{
+          fill("white");
+        }
+        square((x+1) * cellSize, y * cellSize, cellSize);
+      }
+    }
+  }
+}
+
+function delayShield(){
+  lastTimeSwitched = millis();
+  if (isProtecting && millis() > lastTimeSwitched+delayTime){
+    isProtecting = false;
+    lastTimeSwitched = millis();
+  }
 }
