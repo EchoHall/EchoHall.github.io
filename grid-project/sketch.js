@@ -1,4 +1,4 @@
-
+// Quan Le
 // Galaga kinda
 // Oct 29, 2024
 
@@ -21,7 +21,8 @@ let theEnemy = {
 
 let isProtecting = false;
 let lastTimeSwitched = 0;
-let delayTime = 1000;
+let delayTime = 5000;
+let enemyMovementTime = 1000;
 
 function setup() {
   if (windowWidth < windowHeight) {
@@ -46,6 +47,7 @@ function windowResized() {
     resizeCanvas(windowHeight, windowHeight);
   }
   cellSize = height/GRID_SIZE;
+  lastTimeSwitched = millis();
 }
 
 function draw() {
@@ -53,10 +55,11 @@ function draw() {
   displayGrid();
   loadShield();
   delayShield();
+  moveEnemy();
 }
 
 function mousePressed() {
-  isProtecting = !isProtecting;
+  isProtecting = true;
 }
 
 function keyPressed() {
@@ -89,6 +92,18 @@ function movePlayer(x, y) {
     //put the player into the grid
     grid[thePlayer.y][thePlayer.x] = PLAYER;
   }
+}
+
+function moveEnemy(){
+  // if(theEnemy.x <= 0){
+  //   theEnemy.y = random(9);
+  //   theEnemy.x = 9;
+  // }
+
+  if(millis() > lastTimeSwitched + enemyMovementTime){
+    theEnemy.x -= 1;
+  }
+
 }
 
 
@@ -141,7 +156,6 @@ function loadShield(){
 }
 
 function delayShield(){
-  lastTimeSwitched = millis();
   if (isProtecting && millis() > lastTimeSwitched+delayTime){
     isProtecting = false;
     lastTimeSwitched = millis();
