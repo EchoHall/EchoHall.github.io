@@ -95,12 +95,12 @@ function movePlayer(x, y) {
 }
 
 function moveEnemy(){
-  // if(theEnemy.x <= 0){
-  //   theEnemy.y = random(9);
-  //   theEnemy.x = 9;
-  // }
+  if(theEnemy.x <= 0){
+    theEnemy.y = random(9);
+    theEnemy.x = 9;
+  }
 
-  if(millis() > lastTimeSwitched + enemyMovementTime){
+  if(millis() > lastTimeSwitched + enemyMovementTime && theEnemy.x > 0){
     theEnemy.x -= 1;
   }
 
