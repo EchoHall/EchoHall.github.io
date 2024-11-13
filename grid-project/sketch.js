@@ -19,10 +19,18 @@ let theEnemy = {
   y: 9,
 };
 
+const SHIELD = 8;
+let theShield ={
+  x:thePlayer.x+1,
+  y:thePlayer.y,
+};
+
 let isProtecting = false;
 let lastTimeSwitched = 0;
 let delayTime = 5000;
 let enemyMovementTime = 1000;
+
+let lost = false;
 
 function setup() {
   if (windowWidth < windowHeight) {
@@ -52,10 +60,16 @@ function windowResized() {
 
 function draw() {
   background(220);
-  displayGrid();
+  //stop the game after losing
+  if(!lost) {
+    displayGrid(); 
+  }
   loadShield();
   delayShield();
-  moveEnemy();
+  //making enemies move one at a time
+  if(millis() > lastTimeSwitched + enemyMovementTime){
+    moveEnemy(theEnemy.x-1, theEnemy.y);
+  }
 }
 
 function mousePressed() {
@@ -94,16 +108,28 @@ function movePlayer(x, y) {
   }
 }
 
-function moveEnemy(){
-  if(theEnemy.x <= 0){
-    theEnemy.y = random(9);
-    theEnemy.x = 9;
+function moveEnemy(x, y){
+  let oldX = theEnemy.x;
+  let oldY = theEnemy.y;
+  
+  if(grid[y][x] === PLAYER){
+    lost = true;
   }
 
-  if(millis() > lastTimeSwitched + enemyMovementTime && theEnemy.x > 0){
-    theEnemy.x -= 1;
+  if(grid[y][x-1] === PLAYER && isProtecting || x < 0){
+    theEnemy.x = 10;
+    theEnemy.y = 1;
   }
+  
+  if(x >= 0){
 
+    theEnemy.x = x;
+    theEnemy.y = y;
+
+    grid[oldY][oldX] = OPEN_TILE;
+
+    grid[theEnemy.y][theEnemy.x] = ENEMY;
+  }
 }
 
 
