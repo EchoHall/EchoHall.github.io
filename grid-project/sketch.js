@@ -1,5 +1,6 @@
 // Quan Le
-// Galaga kinda
+// Dodge William Afton
+// use W and S to move the red character up and down. Left click to make a yellow shield appear for 5 seconds to protect the red character. 
 // Oct 29, 2024
 
 let grid;
@@ -108,10 +109,10 @@ function moveEnemy(x, y){
   if(grid[y][x] === PLAYER && !isProtecting){
     lost = true;
   }
-
+  //put enemy back to the beginning
   if(grid[y][x] === PLAYER && isProtecting || x < 0){
     theEnemy.x = 10;
-    theEnemy.y = 1;
+    theEnemy.y = floor(random(9));
   }
   
   if(x >= 0){
@@ -119,10 +120,12 @@ function moveEnemy(x, y){
     theEnemy.x = x;
     theEnemy.y = y;
 
+    //reset old location to player if shield is on
     if(grid[y][x+1] === PLAYER && isProtecting){
       grid[oldY][oldX-1] = PLAYER;
     }
 
+    //reset old location to open tile
     else{
       grid[oldY][oldX] = OPEN_TILE;
     }
@@ -181,6 +184,7 @@ function loadShield(){
 }
 
 function delayShield(){
+  //shield timing
   if (isProtecting && millis() > lastTimeSwitched+delayTime){
     isProtecting = false;
     lastTimeSwitched = millis();
