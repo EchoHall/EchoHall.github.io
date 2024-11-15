@@ -6,8 +6,9 @@
 let grid;
 let cellSize;
 const GRID_SIZE = 10;
+
 const OPEN_TILE = 0;
-const IMPASSIBLE = 1;
+
 const PLAYER = 9;
 let thePlayer = {
   x: 2, 
@@ -59,7 +60,6 @@ function draw() {
   if(!lost) {
     displayGrid(); 
   }
-  loadShield();
   delayShield();
 
   moveEnemy(theEnemy.x-1, theEnemy.y);
@@ -71,14 +71,24 @@ function mousePressed() {
 }
 
 function keyPressed() {
-  if (key === "s") {
+  if (key === "s" && !lost) {
     //move down
     movePlayer(thePlayer.x, thePlayer.y + 1);
   }
 
-  if (key === "w") {
+  if (key === "w" && !lost) {
     //move up
     movePlayer(thePlayer.x, thePlayer.y - 1);
+  }
+
+  if (key === "a" && !lost) {
+    //move left
+    movePlayer(thePlayer.x - 1, thePlayer.y);
+  }
+
+  if (key === "d" && !lost) {
+    //move right
+    movePlayer(thePlayer.x+1, thePlayer.y);
   }
 }
 
@@ -110,7 +120,7 @@ function moveEnemy(x, y){
     lost = true;
   }
   //put enemy back to the beginning
-  if(grid[y][x] === PLAYER && isProtecting || x < 0){
+  if(x < 0){
     theEnemy.x = 10;
     theEnemy.y = floor(random(9));
   }
@@ -121,8 +131,8 @@ function moveEnemy(x, y){
     theEnemy.y = y;
 
     //reset old location to player if shield is on
-    if(grid[y][x+1] === PLAYER && isProtecting){
-      grid[oldY][oldX-1] = PLAYER;
+    if(grid[oldY][oldX] === PLAYER){
+      grid[y][x] = PLAYER;
     }
 
     //reset old location to open tile
@@ -143,7 +153,13 @@ function displayGrid() {
       }
       
       else if (grid[y][x] === PLAYER) {
-        fill("red");
+        if (isProtecting){
+          fill("yellow");
+        }
+
+        else{
+          fill("red");
+        }
       }
       
       else if(grid[y][x] === ENEMY){
@@ -164,23 +180,6 @@ function generateGrid(cols, rows) {
     }
   }
   return newGrid;
-}
-
-function loadShield(){
-  for (let y = 0; y < GRID_SIZE; y++) {
-    for (let x = 0; x < GRID_SIZE; x++) {
-      if (grid[y][x] === PLAYER) {
-        if (isProtecting){
-          fill("yellow");
-        }
-
-        else{
-          fill("white");
-        }
-        square((x+1) * cellSize, y * cellSize, cellSize);
-      }
-    }
-  }
 }
 
 function delayShield(){
