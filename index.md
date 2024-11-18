@@ -9,19 +9,21 @@
 
 - [generative art](art)
 
--[Perlin Noise Ball](perlin)
+- [Perlin Noise Ball](perlin)
 
--[terrain generation](terrain)
+- [terrain generation](terrain)
 
--[Bubble Demo](bubble)
+- [Bubble Demo](bubble)
 
--[Translate](translate)
+- [Translate](translate)
 
--[Grid Demo](grid)
+- [Grid Demo](grid)
 
--[rectangular Grid](rectangular-gird)
+- [rectangular Grid](rectangular-gird)
 
--[Walker OOP](walker-oop)
+- [Walker OOP](walker-oop)
+
+- [Firework OOP](fireworks)
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
