@@ -24,6 +24,8 @@
 - [Walker OOP](walker-oop)
 
 - [Firework OOP](fireworks)
+
+- [Connected Node OOP](nodes)
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
