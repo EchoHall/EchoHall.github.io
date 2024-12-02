@@ -28,6 +28,8 @@
 - [Connected Node OOP](nodes)
 
 - [collide 2d library](collide)
+
+- [Local storage Demo](local-storage)
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
