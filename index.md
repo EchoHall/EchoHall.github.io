@@ -30,6 +30,8 @@
 - [collide 2d library](collide)
 
 - [Local storage Demo](local-storage)
+
+- [inheritance OOP](inheritance)
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
