@@ -32,6 +32,10 @@
 - [Local storage Demo](local-storage)
 
 - [inheritance OOP](inheritance)
+
+- [fractal circles](fractal)
+
+-[sierpinksi triangle](triangle)
 ## Project
 - [interactive Screen](interactive-screen)
 - [array assignment](array)
